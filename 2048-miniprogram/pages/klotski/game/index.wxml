@@ -1,0 +1,91 @@
+<view class="page theme-{{theme}}">
+  <view class="page-home-link" bindtap="onBackHome">‹ 游戏合集</view>
+  <view class="topbar">
+    <view class="topbar__left">
+      <text class="topbar__title">{{daily ? '每日挑战' : '数字华容道'}}</text>
+      <text class="topbar__size">{{size}} × {{size}}{{daily ? ' · 每天同一局' : ''}}</text>
+    </view>
+    <view class="topbar__stats">
+      <view class="stat">
+        <text class="stat__label">步数</text>
+        <text class="stat__value">{{moves}}</text>
+      </view>
+      <view class="stat">
+        <text class="stat__label">用时</text>
+        <text class="stat__value">{{elapsedText}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="best">最佳：{{bestText}}</view>
+
+  <view
+    class="board board--{{size}} {{shake ? 'board--shake' : ''}}"
+    bindtouchstart="onTouchStart"
+    catchtouchmove="onTouchMove"
+    bindtouchend="onTouchEnd"
+    bindtouchcancel="onTouchCancel"
+    aria-role="application"
+    aria-label="数字华容道棋盘，滑动移动数字"
+  >
+    <view class="board-inner">
+      <view
+        wx:for="{{cells}}"
+        wx:key="id"
+        class="cell"
+        style="left:{{item.left}};top:{{item.top}};width:{{item.size}};height:{{item.size}};"
+      ></view>
+      <view
+        wx:for="{{tiles}}"
+        wx:key="key"
+        class="klotski-tile {{item.groupClass}} {{item.value === movedValue ? 'klotski-tile--moved' : ''}}"
+        style="left:{{item.left}};top:{{item.top}};width:{{item.size}};height:{{item.size}};"
+      >
+        <text class="klotski-tile__value">{{item.value}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="hint" wx:if="{{daily}}">每日挑战：每天同一局，把 1 到 {{maxNumber}} 排好，完成仍计入最佳成绩。</view>
+  <view class="hint" wx:else>滑动数字，把 1 到 {{maxNumber}} 按顺序排好，最后留空即完成。</view>
+  <view class="cloud-tip" wx:if="{{cloudMessage && status !== 'won'}}">{{cloudMessage}}</view>
+
+  <view class="hint-tools">
+    <view class="hint-btn" bindtap="onHintTap">{{hintBusy ? '计算中…' : 'AI 提示'}}</view>
+    <view class="hint-btn" wx:if="{{hintSteps > 1}}" bindtap="onDemoTap">自动演示</view>
+    <view class="hint-result" wx:if="{{hintText}}">{{hintText}}</view>
+  </view>
+
+  <view class="actions" wx:if="{{daily}}">
+    <button class="btn btn-ghost action-btn" bindtap="onRestartTap">重新挑战</button>
+    <button class="btn btn-primary action-btn" bindtap="onBackHome">返回首页</button>
+  </view>
+  <view class="actions" wx:else>
+    <button class="btn btn-ghost action-btn" bindtap="onRestartTap">重新打乱</button>
+    <button class="btn btn-primary action-btn" bindtap="onChangeSizeTap">换尺寸</button>
+  </view>
+
+  <view wx:if="{{status === 'won'}}" class="dialog-mask">
+    <view class="dialog-card">
+      <text class="dialog-title">完成！</text>
+      <text class="dialog-message">{{winMessage}}</text>
+      <text class="dialog-cloud" wx:if="{{cloudMessage}}">{{cloudMessage}}</text>
+      <text class="dialog-cloud-rank" wx:if="{{cloudRank && !daily}}">当前总榜第 {{cloudRank}} 名</text>
+      <view class="dialog-actions">
+        <button class="btn btn-ghost dialog-btn" bindtap="onWinAgain">{{daily ? '再挑战' : '再来一局'}}</button>
+        <button class="btn btn-primary dialog-btn" bindtap="onBackHome">{{daily ? '返回首页' : '换尺寸'}}</button>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{modal}}" class="dialog-mask">
+    <view class="dialog-card">
+      <text class="dialog-title">{{modalTitle}}</text>
+      <text class="dialog-message">{{modalMessage}}</text>
+      <view class="dialog-actions">
+        <button class="btn btn-ghost dialog-btn" bindtap="onModalCancel">取消</button>
+        <button class="btn btn-danger dialog-btn" bindtap="onModalConfirm">{{modalPrimary}}</button>
+      </view>
+    </view>
+  </view>
+</view>

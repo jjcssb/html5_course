@@ -1,0 +1,10 @@
+node_modules/
+preview-qr.png
+preview-info.json
+project.private.config.json
+*.zip
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

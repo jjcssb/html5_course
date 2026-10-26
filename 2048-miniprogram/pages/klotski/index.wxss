@@ -1,0 +1,262 @@
+.page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 40rpx 30rpx 40rpx;
+  padding-bottom: calc(40rpx + constant(safe-area-inset-bottom));
+  padding-bottom: calc(40rpx + env(safe-area-inset-bottom));
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header {
+  width: 690rpx;
+  margin-top: 20rpx;
+}
+
+.header__title {
+  display: block;
+  font-size: 52rpx;
+  font-weight: 800;
+}
+
+.header__subtitle {
+  display: block;
+  margin-top: 10rpx;
+  font-size: 24rpx;
+  color: var(--text-muted);
+}
+
+.size-list {
+  width: 690rpx;
+  margin-top: 40rpx;
+}
+
+.size-card {
+  display: flex;
+  align-items: center;
+  padding: 28rpx;
+  margin-bottom: 26rpx;
+  border-radius: 24rpx;
+  background: var(--panel-bg);
+  border: 1rpx solid var(--panel-border);
+  box-sizing: border-box;
+}
+
+.size-card--hover {
+  transform: scale(0.985);
+  opacity: 0.92;
+}
+
+.size-card__preview {
+  flex: 0 0 auto;
+  margin-right: 30rpx;
+}
+
+.preview-grid {
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  padding: 6rpx;
+  border-radius: 18rpx;
+  background: var(--board-bg);
+}
+
+.preview-grid--3 {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.preview-grid--4 {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.preview-grid--3 .preview-cell {
+  width: 33.3333%;
+  height: 33.3333%;
+}
+
+.preview-grid--4 .preview-cell {
+  width: 25%;
+  height: 25%;
+}
+
+.preview-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  border: 3rpx solid var(--board-bg);
+  border-radius: 9rpx;
+  background: var(--primary);
+  color: var(--primary-fg);
+  font-size: 22rpx;
+  font-weight: 700;
+}
+
+.preview-cell--blank {
+  background: var(--cell-bg);
+}
+
+.size-card__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.size-card__title-row {
+  display: flex;
+  align-items: baseline;
+}
+
+.size-card__title {
+  font-size: 40rpx;
+  font-weight: 800;
+}
+
+.size-card__tag {
+  margin-left: 14rpx;
+  padding: 4rpx 14rpx;
+  border-radius: 999rpx;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-size: 20rpx;
+  font-weight: 600;
+}
+
+.size-card__desc {
+  display: block;
+  margin-top: 10rpx;
+  font-size: 22rpx;
+  color: var(--text-muted);
+}
+
+.size-card__best {
+  display: block;
+  margin-top: 14rpx;
+  font-size: 21rpx;
+  color: var(--accent-strong);
+}
+
+.tips {
+  width: 690rpx;
+  margin-top: 10rpx;
+  padding: 16rpx 20rpx;
+  border-radius: 18rpx;
+  background: var(--panel-bg);
+  border: 1rpx dashed var(--panel-border);
+  box-sizing: border-box;
+  font-size: 21rpx;
+  line-height: 1.6;
+  color: var(--text-muted);
+  text-align: left;
+}
+
+/* ---------- 华容道选择页视觉升级 ---------- */
+.page {
+  background:
+    radial-gradient(circle at 0% 0%, rgba(255, 226, 190, 0.5), transparent 30%),
+    radial-gradient(circle at 100% 6%, rgba(223, 211, 255, 0.26), transparent 28%),
+    var(--bg);
+}
+
+.header {
+  margin-top: 12rpx;
+  padding: 0 4rpx;
+  box-sizing: border-box;
+}
+
+.header__eyebrow {
+  display: block;
+  margin-bottom: 8rpx;
+  font-size: 17rpx;
+  font-weight: 800;
+  letter-spacing: 4rpx;
+  color: var(--accent-strong);
+  opacity: 0.72;
+}
+
+.header__title {
+  font-size: 56rpx;
+  letter-spacing: -1rpx;
+}
+
+.header__subtitle {
+  margin-top: 6rpx;
+  font-size: 21rpx;
+}
+
+.size-list {
+  margin-top: 28rpx;
+}
+
+.size-card {
+  position: relative;
+  padding: 26rpx;
+  border-radius: 28rpx;
+  background: linear-gradient(150deg, var(--panel-bg), var(--bg));
+  box-shadow: 0 16rpx 34rpx rgba(92, 65, 38, 0.09);
+  overflow: hidden;
+}
+
+.size-card::after {
+  content: '';
+  position: absolute;
+  right: -40rpx;
+  top: -50rpx;
+  width: 190rpx;
+  height: 190rpx;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  opacity: 0.55;
+}
+
+.size-card__preview {
+  position: relative;
+  z-index: 1;
+  padding: 12rpx;
+  border-radius: 20rpx;
+  background: rgba(255, 255, 255, 0.26);
+  box-shadow: inset 0 0 0 1rpx var(--panel-border);
+}
+
+.preview-grid {
+  border-radius: 14rpx;
+}
+
+.size-card__body {
+  position: relative;
+  z-index: 1;
+  padding-left: 4rpx;
+}
+
+.size-card__title {
+  font-size: 42rpx;
+}
+
+.size-card__tag {
+  background: rgba(255, 255, 255, 0.34);
+}
+
+.size-card__desc {
+  margin-top: 8rpx;
+  line-height: 1.45;
+}
+
+.size-card__best {
+  margin-top: 10rpx;
+  font-size: 20rpx;
+}
+
+.size-card__cta {
+  display: inline-block;
+  margin-top: 12rpx;
+  padding: 8rpx 18rpx;
+  border-radius: 999rpx;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-size: 19rpx;
+  font-weight: 700;
+}

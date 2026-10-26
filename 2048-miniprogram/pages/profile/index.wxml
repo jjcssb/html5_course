@@ -1,0 +1,109 @@
+<view class="page theme-{{theme}}">
+  <view class="page-home-link" bindtap="onBackHome">‹ 游戏合集</view>
+
+  <view wx:if="{{loading}}" class="state">正在加载资料…</view>
+  <view wx:elif="{{error}}" class="state state--error">
+    <text class="state__text">{{error}}</text>
+    <button class="btn btn-ghost state__btn" bindtap="onRetry">重试</button>
+  </view>
+
+  <block wx:else>
+    <view class="profile-card">
+      <view class="avatar">
+        <image wx:if="{{avatarUrl}}" class="avatar__image" src="{{avatarUrl}}" mode="aspectFill"></image>
+        <text wx:else>{{avatarEmoji}}</text>
+      </view>
+      <view class="profile-card__main">
+        <text class="profile-card__label">我的昵称</text>
+        <input
+          class="nickname-input"
+          value="{{nickname}}"
+          maxlength="12"
+          placeholder="输入 2–12 个字符"
+          bindinput="onNicknameInput"
+        />
+        <text class="profile-card__hint">排行榜、成就和分享都会使用这个名字</text>
+      </view>
+    </view>
+
+    <view class="section-head">
+      <text class="section-head__title">头像</text>
+      <text class="section-head__count">{{avatarEmoji}}</text>
+    </view>
+    <view class="avatar-grid">
+      <view
+        wx:for="{{avatars}}"
+        wx:key="id"
+        class="avatar-item {{avatar === item.id && !avatarUrl ? 'avatar-item--on' : ''}}"
+        data-avatar="{{item.id}}"
+        bindtap="onAvatarTap"
+      >
+        <text class="avatar-item__emoji">{{item.emoji}}</text>
+      </view>
+    </view>
+
+    <button class="wechat-avatar-btn {{avatarUrl ? 'wechat-avatar-btn--on' : ''}}" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
+      <image wx:if="{{avatarPreview}}" class="wechat-avatar-preview" src="{{avatarPreview}}" mode="aspectFill"></image>
+      <text class="wechat-avatar-text">{{uploadingAvatar ? '正在上传…' : (avatarUrl ? '已使用微信头像' : '使用微信头像')}}</text>
+    </button>
+
+    <view class="section-head">
+      <text class="section-head__title">性别</text>
+      <text class="section-head__count">{{genderLabel}}</text>
+    </view>
+    <view class="gender-grid">
+      <view
+        wx:for="{{genders}}"
+        wx:key="id"
+        class="gender-item {{gender === item.id ? 'gender-item--on' : ''}}"
+        data-gender="{{item.id}}"
+        bindtap="onGenderTap"
+      >
+        <text class="gender-item__symbol">{{item.symbol}}</text>
+        <text class="gender-item__label">{{item.label}}</text>
+      </view>
+    </view>
+
+    <view class="save-row">
+      <button class="btn btn-primary save-btn" loading="{{saving}}" disabled="{{saving}}" bindtap="onSave">保存资料</button>
+    </view>
+
+    <view class="stats">
+      <view class="stat">
+        <text class="stat__label">2048 最佳</text>
+        <text class="stat__value">{{best2048}}</text>
+      </view>
+      <view class="stat">
+        <text class="stat__label">3×3 最佳</text>
+        <text class="stat__value">{{best3}}</text>
+      </view>
+      <view class="stat">
+        <text class="stat__label">4×4 最佳</text>
+        <text class="stat__value">{{best4}}</text>
+      </view>
+    </view>
+
+    <view class="section-head">
+      <text class="section-head__title">成就</text>
+      <text class="section-head__count">{{achievementCount}}/{{achievementTotal}}</text>
+    </view>
+    <view class="achievement-list">
+      <view wx:for="{{achievements}}" wx:key="id" class="achievement {{item.unlocked ? 'achievement--on' : ''}}">
+        <view class="achievement__dot">{{item.unlocked ? '✓' : '○'}}</view>
+        <view class="achievement__main">
+          <text class="achievement__name">{{item.name}}</text>
+          <text class="achievement__desc">{{item.desc}}</text>
+        </view>
+        <text class="achievement__state">{{item.unlocked ? '已解锁' : '未解锁'}}</text>
+      </view>
+    </view>
+
+    <view class="share-row">
+      <button class="btn btn-ghost share-btn" open-type="share">分享挑战</button>
+    </view>
+
+    <view class="danger-row">
+      <text class="danger-link" bindtap="onClearCloud">清空云端记录</text>
+    </view>
+  </block>
+</view>

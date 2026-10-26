@@ -1,0 +1,100 @@
+<view class="page theme-{{theme}}">
+  <view class="hero">
+    <text class="hero__eyebrow">MINI GAME HUB</text>
+    <text class="hero__title">小游戏合集</text>
+    <text class="hero__subtitle">{{cloudReady ? greeting + ' · 2048 · 数字华容道' : '2048 · 数字华容道'}}</text>
+  </view>
+
+  <view class="cloud-panel {{cloudReady ? 'cloud-panel--on' : 'cloud-panel--off'}}">
+    <view class="cloud-panel__head">
+      <view class="cloud-avatar">
+        <image wx:if="{{avatarUrl}}" class="cloud-avatar__image" src="{{avatarUrl}}" mode="aspectFill"></image>
+        <text wx:else>{{avatarEmoji}}</text>
+      </view>
+      <view class="cloud-panel__identity" bindtap="onProfileTap">
+        <text class="cloud-panel__label">{{cloudReady ? '云端玩家' : '单机模式'}}</text>
+        <text class="cloud-panel__name">{{cloudReady ? nickname : (cloudLoading ? '正在连接云端…' : '云端未连接')}}</text>
+        <text class="cloud-panel__hint" wx:if="{{cloudReady && !nicknameSet}}">点击设置昵称 →</text>
+      </view>
+      <text class="cloud-panel__badge">{{cloudReady ? '已同步' : (cloudLoading ? '连接中' : '离线')}}</text>
+    </view>
+    <view class="cloud-panel__actions">
+      <view class="cloud-action" bindtap="onLeaderboardTap">
+        <text class="cloud-action__icon">榜</text>
+        <text class="cloud-action__text">排行榜</text>
+      </view>
+      <view class="cloud-action" bindtap="onAchievementsTap" wx:if="{{cloudReady}}">
+        <text class="cloud-action__icon">成</text>
+        <text class="cloud-action__text">成就 {{achievementCount}}/{{achievementTotal}}</text>
+      </view>
+      <view class="cloud-action" bindtap="onProfileTap" wx:if="{{cloudReady}}">
+        <text class="cloud-action__icon">我</text>
+        <text class="cloud-action__text">我的资料</text>
+      </view>
+      <view class="cloud-action" bindtap="onRetryCloudTap" wx:if="{{!cloudReady && !cloudLoading}}">
+        <text class="cloud-action__icon">↻</text>
+        <text class="cloud-action__text">重试连接</text>
+      </view>
+    </view>
+    <text class="cloud-panel__error" wx:if="{{!cloudReady && !cloudLoading && cloudError}}">{{cloudError}}</text>
+  </view>
+
+  <view class="resume-card" wx:if="{{savedGame}}" bindtap="onResumeTap">
+    <view class="resume-card__body">
+      <text class="resume-card__tag">继续上局</text>
+      <text class="resume-card__desc">{{savedGameText}}</text>
+    </view>
+    <text class="resume-card__go">继续 →</text>
+  </view>
+
+  <view class="daily-banner">
+    <view class="daily-banner__body">
+      <view class="daily-banner__tag">每日挑战</view>
+      <text class="daily-banner__title">今天玩哪一局？</text>
+      <text class="daily-banner__desc">{{todayLabel}} · 每天同一局，完成后计入最佳成绩</text>
+    </view>
+    <view class="daily-banner__choices">
+      <view class="daily-choice" data-game="2048" catchtap="onDailyGameTap">2048</view>
+      <view class="daily-choice" data-game="klotski3" catchtap="onDailyGameTap">3×3</view>
+      <view class="daily-choice" data-game="klotski4" catchtap="onDailyGameTap">4×4</view>
+    </view>
+  </view>
+
+  <view class="cards">
+    <view class="game-card" hover-class="game-card--hover" bindtap="on2048Tap">
+      <view class="game-card__preview">
+        <view class="mini-grid mini-grid--4">
+          <view
+            wx:for="{{preview2048}}"
+            wx:key="key"
+            class="mini-cell {{item.className}}"
+          >{{item.value || ''}}</view>
+        </view>
+      </view>
+      <view class="game-card__body">
+        <text class="game-card__title">2048</text>
+        <text class="game-card__desc">滑动合并相同的数字，挑战合成 2048</text>
+        <view class="game-card__action">开始游戏 →</view>
+      </view>
+    </view>
+
+    <view class="game-card" hover-class="game-card--hover" bindtap="onKlotskiTap">
+      <view class="game-card__preview">
+        <view class="mini-grid mini-grid--3">
+          <view
+            wx:for="{{previewKlotski}}"
+            wx:key="key"
+            class="mini-cell mini-klotski {{item.blank ? 'mini-cell--blank' : ''}}"
+          >{{item.value || ''}}</view>
+        </view>
+      </view>
+      <view class="game-card__body">
+        <text class="game-card__title">数字华容道</text>
+        <text class="game-card__desc">滑动数字，把它们按顺序排好</text>
+        <view class="game-card__action">3×3 / 4×4 →</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="footer-tip">滑动操作 · 成绩保存在本机，登录后同步云端排行榜</view>
+</view>

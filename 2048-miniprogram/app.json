@@ -1,0 +1,21 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/onboarding/index",
+    "pages/index/index",
+    "pages/klotski/index",
+    "pages/klotski/game/index",
+    "pages/leaderboard/index",
+    "pages/profile/index"
+  ],
+  "window": {
+    "navigationBarTitleText": "小游戏合集",
+    "navigationBarBackgroundColor": "#faf8ef",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#faf8ef",
+    "backgroundTextStyle": "dark"
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

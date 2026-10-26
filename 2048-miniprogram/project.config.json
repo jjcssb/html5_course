@@ -1,0 +1,91 @@
+{
+  "compileType": "miniprogram",
+  "cloudfunctionRoot": "cloudfunctions/",
+  "appid": "wxfc589ec5dc5c6d24",
+  "projectname": "2048-miniprogram",
+  "description": "小游戏合集（2048 + 数字华容道 + 云排行榜）",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true,
+    "newFeature": true,
+    "coverView": true,
+    "autoAudits": false,
+    "checkInvalidKey": true,
+    "checkSiteMap": true,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": true,
+    "useMultiFrameRuntime": true,
+    "useApiHook": true,
+    "useApiHostProcess": true,
+    "showShadowRootInWxmlPanel": true,
+    "packNpmManually": false,
+    "enableEngineNative": false,
+    "useIsolateContext": true,
+    "userConfirmedBundleSwitch": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "disableUseStrict": false,
+    "showES6CompileOption": false,
+    "useCompilerPlugins": false
+  },
+  "packOptions": {
+    "ignore": [
+      {
+        "type": "folder",
+        "value": "cloudfunctions"
+      },
+      {
+        "type": "folder",
+        "value": "tests"
+      },
+      {
+        "type": "folder",
+        "value": "scripts"
+      },
+      {
+        "type": "folder",
+        "value": "node_modules"
+      },
+      {
+        "type": "folder",
+        "value": "screenshots"
+      },
+      {
+        "type": "file",
+        "value": "preview-qr.png"
+      },
+      {
+        "type": "file",
+        "value": "preview-info.json"
+      },
+      {
+        "type": "file",
+        "value": "README.md"
+      },
+      {
+        "type": "file",
+        "value": "TEST-RECORD.md"
+      },
+      {
+        "type": "file",
+        "value": "ACCEPTANCE-CHECKLIST.md"
+      },
+      {
+        "type": "file",
+        "value": "CLOUD-SETUP.md"
+      },
+      {
+        "type": "file",
+        "value": "package.json"
+      },
+      {
+        "type": "file",
+        "value": ".gitignore"
+      }
+    ]
+  },
+  "condition": {}
+}

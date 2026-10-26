@@ -1,0 +1,181 @@
+/* 全局主题变量与基础控件样式 */
+page {
+  background: #faf8ef;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ---------- 浅色 ---------- */
+.theme-light {
+  --bg: #faf8ef;
+  --text: #3b3229;
+  --text-muted: #8c7f6d;
+  --board-bg: #bbada0;
+  --cell-bg: rgba(238, 228, 218, 0.35);
+  --panel-bg: #f3ece1;
+  --panel-border: rgba(143, 122, 102, 0.22);
+  --primary: #8f7a66;
+  --primary-fg: #fdfbf7;
+  --danger: #c0503b;
+  --accent-soft: rgba(237, 194, 46, 0.22);
+  --accent-strong: #9c7612;
+  --tile-2-bg: #eee4da;
+  --tile-2-fg: #776e65;
+  --tile-4-bg: #ede0c8;
+  --tile-4-fg: #776e65;
+  --tile-8-bg: #f2b179;
+  --tile-8-fg: #fdfbf7;
+  --tile-16-bg: #f59563;
+  --tile-16-fg: #fdfbf7;
+  --tile-32-bg: #f67c5f;
+  --tile-32-fg: #fdfbf7;
+  --tile-64-bg: #f65e3b;
+  --tile-64-fg: #fdfbf7;
+  --tile-128-bg: #edcf72;
+  --tile-128-fg: #fdfbf7;
+  --tile-256-bg: #edcc61;
+  --tile-256-fg: #fdfbf7;
+  --tile-512-bg: #edc850;
+  --tile-512-fg: #fdfbf7;
+  --tile-1024-bg: #edc53f;
+  --tile-1024-fg: #fdfbf7;
+  --tile-2048-bg: #edc22e;
+  --tile-2048-fg: #fdfbf7;
+  --tile-super-bg: #3c3a32;
+  --tile-super-fg: #fdfbf7;
+}
+
+/* ---------- 深色 ---------- */
+.theme-dark {
+  --bg: #121419;
+  --text: #e9e6df;
+  --text-muted: #9aa0ad;
+  --board-bg: #262b33;
+  --cell-bg: rgba(255, 255, 255, 0.05);
+  --panel-bg: #1c2027;
+  --panel-border: rgba(255, 255, 255, 0.09);
+  --primary: #6f8cff;
+  --primary-fg: #0d1017;
+  --danger: #e0644c;
+  --accent-soft: rgba(255, 212, 59, 0.18);
+  --accent-strong: #ffd43b;
+  --tile-2-bg: #3a3f4a;
+  --tile-2-fg: #e9e6df;
+  --tile-4-bg: #454b57;
+  --tile-4-fg: #e9e6df;
+  --tile-8-bg: #4c6ef5;
+  --tile-8-fg: #ffffff;
+  --tile-16-bg: #7048e8;
+  --tile-16-fg: #ffffff;
+  --tile-32-bg: #9c36b5;
+  --tile-32-fg: #ffffff;
+  --tile-64-bg: #c2255c;
+  --tile-64-fg: #ffffff;
+  --tile-128-bg: #e8590c;
+  --tile-128-fg: #ffffff;
+  --tile-256-bg: #f08c00;
+  --tile-256-fg: #16181d;
+  --tile-512-bg: #f59f00;
+  --tile-512-fg: #16181d;
+  --tile-1024-bg: #fab005;
+  --tile-1024-fg: #16181d;
+  --tile-2048-bg: #ffd43b;
+  --tile-2048-fg: #16181d;
+  --tile-super-bg: #ff8787;
+  --tile-super-fg: #16181d;
+}
+
+/* ---------- 复古 ---------- */
+.theme-retro {
+  --bg: #efe0c3;
+  --text: #4a382a;
+  --text-muted: #8b7355;
+  --board-bg: #9a7b56;
+  --cell-bg: rgba(255, 248, 232, 0.28);
+  --panel-bg: #e7d3ae;
+  --panel-border: rgba(90, 64, 40, 0.22);
+  --primary: #7a5638;
+  --primary-fg: #fff8ea;
+  --danger: #a53f2b;
+  --accent-soft: rgba(193, 154, 61, 0.24);
+  --accent-strong: #7d5a17;
+  --tile-2-bg: #e8d9bd;
+  --tile-2-fg: #5b4636;
+  --tile-4-bg: #dfc9a2;
+  --tile-4-fg: #5b4636;
+  --tile-8-bg: #c9a06a;
+  --tile-8-fg: #3d2c1c;
+  --tile-16-bg: #b97f47;
+  --tile-16-fg: #fdf6e8;
+  --tile-32-bg: #a8643a;
+  --tile-32-fg: #fdf6e8;
+  --tile-64-bg: #8f4f33;
+  --tile-64-fg: #fdf6e8;
+  --tile-128-bg: #7c8c5c;
+  --tile-128-fg: #fdf6e8;
+  --tile-256-bg: #6b7d4a;
+  --tile-256-fg: #fdf6e8;
+  --tile-512-bg: #5a6d3c;
+  --tile-512-fg: #fdf6e8;
+  --tile-1024-bg: #4a5c31;
+  --tile-1024-fg: #fdf6e8;
+  --tile-2048-bg: #c19a3d;
+  --tile-2048-fg: #2f2415;
+  --tile-super-bg: #3e3227;
+  --tile-super-fg: #f6ecd9;
+}
+
+/* ---------- 按钮 ---------- */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 76rpx;
+  padding: 0 20rpx;
+  margin: 0;
+  border: none;
+  border-radius: 16rpx;
+  font-size: 24rpx;
+  font-weight: 600;
+  line-height: 1;
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+.btn::after {
+  border: none;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--primary-fg);
+}
+
+.btn-ghost {
+  background: var(--panel-bg);
+  color: var(--text);
+  border: 1rpx solid var(--panel-border);
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: #fff8f4;
+}
+
+.btn-small {
+  height: 60rpx;
+  font-size: 22rpx;
+  padding: 0 16rpx;
+}
+
+/* 子页面顶部的“返回游戏合集”入口 */
+.page-home-link {
+  width: 690rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  margin-bottom: 6rpx;
+  font-size: 22rpx;
+  color: var(--text-muted);
+}

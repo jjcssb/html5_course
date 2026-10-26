@@ -1,0 +1,134 @@
+<view class="page theme-{{theme}}">
+  <view class="page-home-link" bindtap="onBackHome">‹ 游戏合集</view>
+  <view class="daily-strip" wx:if="{{daily}}">
+    <text class="daily-strip__label">每日挑战 · 2048</text>
+    <text class="daily-strip__tag">今日限定</text>
+  </view>
+  <view class="header">
+    <view class="brand">
+      <text class="brand__eyebrow">CLASSIC · 4×4</text>
+      <text class="brand__title">2048</text>
+      <text class="brand__subtitle">滑动合并 · 挑战 2048</text>
+    </view>
+    <view class="scoreboard">
+      <view class="score-card">
+        <text class="score-card__label">得分</text>
+        <text class="score-card__value">{{score}}</text>
+      </view>
+      <view class="score-card">
+        <text class="score-card__label">最高分</text>
+        <text class="score-card__value">{{best}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="toolbar">
+    <button class="btn btn-primary" bindtap="onRestartTap">重新开始</button>
+    <view class="theme-switch" aria-role="group">
+      <view
+        wx:for="{{themes}}"
+        wx:key="value"
+        class="theme-switch__item {{theme === item.value ? 'is-active' : ''}}"
+        data-value="{{item.value}}"
+        bindtap="onThemeTap"
+      >{{item.label}}</view>
+    </view>
+    <button class="btn btn-ghost" bindtap="onSoundTap">{{soundEnabled ? '音效开' : '音效关'}}</button>
+  </view>
+
+  <view
+    class="board {{shake ? 'board--shake' : ''}}"
+    bindtouchstart="onTouchStart"
+    catchtouchmove="onTouchMove"
+    bindtouchend="onTouchEnd"
+    bindtouchcancel="onTouchCancel"
+    aria-role="application"
+    aria-label="2048 棋盘，上下左右滑动移动方块"
+  >
+    <view class="board-inner">
+      <view
+        wx:for="{{cells}}"
+        wx:key="id"
+        class="cell"
+        style="left:{{item.left}};top:{{item.top}};width:{{item.size}};height:{{item.size}};"
+      ></view>
+      <view
+        wx:for="{{tiles}}"
+        wx:key="id"
+        class="tile {{item.className}} {{item.isNew ? 'tile--new' : ''}} {{item.merged ? 'tile--merged' : ''}}"
+        style="left:{{item.left}};top:{{item.top}};width:{{item.size}};height:{{item.size}};"
+      >
+        <text class="tile__value {{item.lenClass}}">{{item.value}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="hint">上下左右滑动方块，相同数字会合并；目标合成 2048。</view>
+  <view class="hint hint--muted">重新进入小程序会开始新的一局；最高分与历史战绩保存在本机。</view>
+
+  <view class="history">
+    <view class="history__summary" bindtap="onToggleHistory">
+      <text class="history__title">历史战绩</text>
+      <view class="history__right">
+        <text class="history__count">{{history.length}}/10</text>
+        <text class="history__arrow">{{historyOpen ? '▲' : '▼'}}</text>
+      </view>
+    </view>
+
+    <view wx:if="{{historyOpen}}">
+      <view wx:if="{{history.length === 0}}" class="history__empty">完成一局后会在这里记录成绩。</view>
+      <view wx:else class="history__list">
+        <view class="history__item" wx:for="{{history}}" wx:key="key">
+          <view class="history__row">
+            <text class="history__score">{{item.score}} 分</text>
+            <text class="history__tag {{item.won ? 'history__tag--win' : ''}}">{{item.reasonLabel}}</text>
+          </view>
+          <view class="history__meta">
+            <text>最大 {{item.maxTile}}</text>
+            <text>{{item.moves}} 步</text>
+            <text>用时 {{item.durationLabel}}</text>
+            <text>{{item.dateLabel}}</text>
+          </view>
+        </view>
+        <button class="btn btn-ghost btn-small history__clear" bindtap="onClearHistoryTap">清空战绩</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 胜利提示：同一局只出现一次，继续游戏后由页面状态控制 -->
+  <view wx:if="{{status === 'won'}}" class="dialog-mask">
+    <view class="dialog-card">
+      <text class="dialog-title">达成 2048！</text>
+      <text class="dialog-message">{{winMessage}}</text>
+      <text class="dialog-cloud" wx:if="{{cloudSavedText}}">{{cloudSavedText}}</text>
+      <view class="dialog-actions">
+        <button class="btn btn-ghost dialog-btn" bindtap="onContinueTap">继续游戏</button>
+        <button class="btn btn-primary dialog-btn" bindtap="onRestartOverlayTap">重新开始</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 游戏结束 -->
+  <view wx:if="{{status === 'over'}}" class="dialog-mask">
+    <view class="dialog-card">
+      <text class="dialog-title">游戏结束</text>
+      <text class="dialog-message">{{overMessage}}</text>
+      <text class="dialog-cloud" wx:if="{{cloudSavedText}}">{{cloudSavedText}}</text>
+      <view class="dialog-actions">
+        <button class="btn btn-primary dialog-btn" bindtap="onRestartOverlayTap">再来一局</button>
+      </view>
+    </view>
+  </view>
+
+  <!-- 重新开始 / 清空战绩确认 -->
+  <view wx:if="{{modal}}" class="dialog-mask">
+    <view class="dialog-card">
+      <text class="dialog-title">{{modalTitle}}</text>
+      <text class="dialog-message">{{modalMessage}}</text>
+      <view class="dialog-actions">
+        <button class="btn btn-ghost dialog-btn" bindtap="onModalCancelTap">取消</button>
+        <button class="btn btn-danger dialog-btn" bindtap="onModalConfirmTap">{{modalPrimary}}</button>
+      </view>
+    </view>
+  </view>
+</view>

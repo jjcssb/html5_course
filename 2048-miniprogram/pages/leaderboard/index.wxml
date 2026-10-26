@@ -1,0 +1,102 @@
+<view class="page theme-{{theme}}">
+  <view class="page-home-link" bindtap="onBackHome">‹ 游戏合集</view>
+
+  <view class="board-hero">
+    <view class="board-hero__top">
+      <text class="board-hero__eyebrow">LEADERBOARD</text>
+      <text class="board-hero__count">{{totalText}}</text>
+    </view>
+    <text class="board-hero__title">{{gameLabel}}排行榜</text>
+    <text class="board-hero__desc">总榜看全站实力，本周榜看最近状态</text>
+  </view>
+
+  <view class="game-tabs">
+    <view
+      wx:for="{{games}}"
+      wx:key="id"
+      class="game-tab {{activeGame === item.id ? 'game-tab--active' : ''}}"
+      data-game="{{item.id}}"
+      bindtap="onGameTap"
+    >{{item.label}}</view>
+  </view>
+
+  <view class="period-tabs">
+    <view
+      wx:for="{{periods}}"
+      wx:key="id"
+      class="period-tab {{activePeriod === item.id ? 'period-tab--active' : ''}}"
+      data-period="{{item.id}}"
+      bindtap="onPeriodTap"
+    >{{item.label}}</view>
+  </view>
+
+  <view wx:if="{{loading}}" class="state">
+    <text class="state__text">正在拉取排行榜…</text>
+  </view>
+
+  <view wx:elif="{{error}}" class="state">
+    <text class="state__text">{{error}}</text>
+    <button class="btn btn-primary state__btn" bindtap="onRetryTap">重试</button>
+  </view>
+
+  <block wx:else>
+    <view class="my-card" wx:if="{{myBest}}">
+      <view class="my-card__avatar">
+        <image wx:if="{{myAvatarUrl}}" class="my-card__avatar-image" src="{{myAvatarUrl}}" mode="aspectFill"></image>
+        <text wx:else>{{myAvatarEmoji}}</text>
+      </view>
+      <view class="my-card__left">
+        <text class="my-card__label">我的最佳</text>
+        <text class="my-card__value">{{myBestText}}</text>
+      </view>
+      <view class="my-card__rank">第 {{myRank}} 名</view>
+    </view>
+
+    <view wx:if="{{!list.length}}" class="state state--empty">
+      <text class="state__text">{{emptyText}}</text>
+    </view>
+
+    <block wx:else>
+      <view class="podium" wx:if="{{podium.length}}">
+        <view
+          wx:for="{{podium}}"
+          wx:key="rank"
+          class="podium-card podium-card--{{item.rank}} {{item.isMe ? 'podium-card--me' : ''}}"
+        >
+          <view class="podium-card__medal">{{item.rank}}</view>
+          <view class="podium-card__avatar">
+            <image wx:if="{{item.avatarUrl}}" class="podium-card__avatar-image" src="{{item.avatarUrl}}" mode="aspectFill"></image>
+            <text wx:else>{{item.avatarEmoji}}</text>
+          </view>
+          <text class="podium-card__name">{{item.nickname}}</text>
+          <text class="podium-card__value">{{item.valueText}}</text>
+        </view>
+      </view>
+
+      <view class="rank-list" wx:if="{{rest.length}}">
+        <view
+          wx:for="{{rest}}"
+          wx:key="rank"
+          class="rank-row {{item.isMe ? 'rank-row--me' : ''}}"
+        >
+          <view class="rank-row__rank">{{item.rank}}</view>
+          <view class="rank-avatar">
+            <image wx:if="{{item.avatarUrl}}" class="rank-avatar__image" src="{{item.avatarUrl}}" mode="aspectFill"></image>
+            <text wx:else>{{item.avatarEmoji}}</text>
+          </view>
+          <view class="rank-row__main">
+            <text class="rank-row__name">{{item.nickname}}</text>
+            <text class="rank-row__me" wx:if="{{item.isMe}}">我</text>
+          </view>
+          <text class="rank-row__value">{{item.valueText}}</text>
+        </view>
+      </view>
+
+      <view class="load-more" wx:if="{{hasMore}}">
+        <button class="btn btn-ghost load-more__btn" loading="{{loadingMore}}" bindtap="onLoadMoreTap">加载更多</button>
+      </view>
+    </block>
+  </block>
+
+  <view class="footnote">2048 按分数优先；华容道按步数少优先、步数相同再比用时 · 分页最多展示前 300 名</view>
+</view>

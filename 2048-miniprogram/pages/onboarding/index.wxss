@@ -1,0 +1,366 @@
+.page {
+  position: relative;
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 32rpx 36rpx 48rpx;
+  padding-bottom: calc(48rpx + constant(safe-area-inset-bottom));
+  padding-bottom: calc(48rpx + env(safe-area-inset-bottom));
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 12% 8%, #ffe2b8 0, rgba(255, 226, 184, 0) 34%),
+    radial-gradient(circle at 92% 18%, #ead7ff 0, rgba(234, 215, 255, 0) 30%),
+    linear-gradient(160deg, #fff9ef 0%, #fdf3e5 52%, #f6ecff 100%);
+  color: #2f2a25;
+}
+
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(10rpx);
+  pointer-events: none;
+}
+
+.glow--one {
+  width: 260rpx;
+  height: 260rpx;
+  top: 170rpx;
+  right: -80rpx;
+  background: rgba(255, 190, 120, 0.22);
+}
+
+.glow--two {
+  width: 220rpx;
+  height: 220rpx;
+  bottom: 180rpx;
+  left: -90rpx;
+  background: rgba(150, 120, 255, 0.14);
+}
+
+.brand {
+  position: relative;
+  display: flex;
+  align-items: center;
+  z-index: 1;
+}
+
+.brand__mark {
+  width: 76rpx;
+  height: 76rpx;
+  border-radius: 22rpx;
+  background: linear-gradient(145deg, #8b6f4e, #b58d5c);
+  color: #fff8ec;
+  font-size: 36rpx;
+  font-weight: 900;
+  line-height: 76rpx;
+  text-align: center;
+  box-shadow: 0 10rpx 22rpx rgba(120, 88, 58, 0.22);
+}
+
+.brand__text {
+  flex: 1 1 auto;
+  min-width: 0;
+  margin-left: 18rpx;
+}
+
+.brand__name {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 800;
+  letter-spacing: 1rpx;
+}
+
+.brand__sub {
+  display: block;
+  margin-top: 2rpx;
+  font-size: 18rpx;
+  color: #9a8b7b;
+}
+
+.brand__tag {
+  flex: 0 0 auto;
+  padding: 8rpx 16rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.72);
+  color: #916f42;
+  font-size: 18rpx;
+  font-weight: 700;
+  border: 1rpx solid rgba(145, 111, 66, 0.18);
+}
+
+.hero {
+  position: relative;
+  margin-top: 54rpx;
+  z-index: 1;
+}
+
+.hero__eyebrow {
+  display: block;
+  font-size: 18rpx;
+  letter-spacing: 5rpx;
+  color: #b18a5b;
+  font-weight: 700;
+}
+
+.hero__title {
+  display: block;
+  margin-top: 10rpx;
+  font-size: 52rpx;
+  line-height: 1.18;
+  font-weight: 900;
+  letter-spacing: -1rpx;
+}
+
+.hero__desc {
+  display: block;
+  margin-top: 12rpx;
+  font-size: 23rpx;
+  line-height: 1.5;
+  color: #8e8174;
+}
+
+.form-card {
+  position: relative;
+  margin-top: 32rpx;
+  padding: 26rpx 24rpx 30rpx;
+  box-sizing: border-box;
+  border-radius: 32rpx;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1rpx solid rgba(255, 255, 255, 0.92);
+  box-shadow: 0 22rpx 60rpx rgba(116, 85, 54, 0.13);
+  backdrop-filter: blur(18rpx);
+  z-index: 1;
+}
+
+.step-head {
+  display: flex;
+  align-items: baseline;
+}
+
+.step-head--gap {
+  margin-top: 30rpx;
+}
+
+.step-head__index {
+  font-size: 18rpx;
+  font-weight: 800;
+  color: #c79a63;
+  letter-spacing: 2rpx;
+}
+
+.step-head__title {
+  margin-left: 10rpx;
+  font-size: 24rpx;
+  font-weight: 800;
+}
+
+.step-head__selected {
+  margin-left: auto;
+  font-size: 20rpx;
+  color: #9a8b7b;
+}
+
+.avatar-grid {
+  margin-top: 14rpx;
+  display: flex;
+  justify-content: space-between;
+}
+
+.avatar-item {
+  width: 92rpx;
+  margin: 0;
+  padding: 12rpx 0 10rpx;
+  border-radius: 20rpx;
+  background: #fbf6ef;
+  border: 2rpx solid transparent;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.avatar-item--on {
+  border-color: #9b7446;
+  background: #fff4e2;
+  box-shadow: 0 8rpx 18rpx rgba(155, 116, 70, 0.16);
+}
+
+.avatar-item__emoji {
+  display: block;
+  font-size: 40rpx;
+  line-height: 1.2;
+}
+
+.avatar-item__label {
+  display: block;
+  margin-top: 2rpx;
+  font-size: 16rpx;
+  color: #9a8b7b;
+}
+
+.wechat-avatar-btn {
+  width: 100%;
+  height: 76rpx;
+  margin-top: 6rpx;
+  padding: 0 18rpx;
+  border-radius: 18rpx;
+  background: #fbf6ef;
+  border: 2rpx dashed #d8c6af;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.wechat-avatar-btn::after {
+  border: none;
+}
+
+.wechat-avatar-btn--on {
+  border-style: solid;
+  border-color: #9b7446;
+  background: #fff4e2;
+}
+
+.wechat-avatar-preview {
+  width: 48rpx;
+  height: 48rpx;
+  margin-right: 10rpx;
+  border-radius: 50%;
+}
+
+.wechat-avatar-text {
+  font-size: 21rpx;
+  color: #916f42;
+  font-weight: 700;
+}
+
+.nickname-box {
+  margin-top: 12rpx;
+  height: 92rpx;
+  padding: 0 18rpx;
+  display: flex;
+  align-items: center;
+  border-radius: 22rpx;
+  background: #fbf6ef;
+  border: 2rpx solid #e8dac7;
+}
+
+.nickname-box__prefix {
+  flex: 0 0 auto;
+  margin-right: 12rpx;
+  font-size: 34rpx;
+}
+
+.nickname-box__input {
+  flex: 1 1 auto;
+  height: 84rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+  color: #2f2a25;
+}
+
+.gender-grid {
+  margin-top: 12rpx;
+  display: flex;
+}
+
+.gender-item {
+  flex: 1 1 0;
+  height: 84rpx;
+  margin-right: 12rpx;
+  border-radius: 20rpx;
+  background: #fbf6ef;
+  border: 2rpx solid transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+.gender-item:last-child {
+  margin-right: 0;
+}
+
+.gender-item--on {
+  border-color: #9b7446;
+  background: #fff4e2;
+}
+
+.gender-item__symbol {
+  font-size: 28rpx;
+  font-weight: 800;
+  color: #9b7446;
+}
+
+.gender-item__label {
+  margin-left: 6rpx;
+  font-size: 23rpx;
+  font-weight: 700;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 92rpx;
+  margin-top: 30rpx;
+  border-radius: 999rpx;
+  background: linear-gradient(135deg, #8e6a43, #b88954);
+  color: #fffaf2;
+  font-size: 28rpx;
+  font-weight: 800;
+  line-height: 92rpx;
+  box-shadow: 0 14rpx 26rpx rgba(142, 106, 67, 0.24);
+}
+
+.submit-btn::after {
+  border: none;
+}
+
+.skip-row {
+  margin-top: 18rpx;
+  text-align: center;
+  font-size: 21rpx;
+  color: #a29383;
+}
+
+.privacy {
+  position: relative;
+  display: block;
+  margin-top: 24rpx;
+  text-align: center;
+  font-size: 18rpx;
+  line-height: 1.5;
+  color: #a99b8c;
+  z-index: 1;
+}
+
+.loading {
+  margin-top: 120rpx;
+  text-align: center;
+}
+
+.loading__title {
+  display: block;
+  font-size: 25rpx;
+  color: #8e8174;
+}
+
+.loading__actions {
+  margin-top: 28rpx;
+  display: flex;
+  justify-content: center;
+}
+
+.ghost-btn {
+  width: 220rpx;
+  height: 76rpx;
+  margin: 0 10rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.8);
+  border: 1rpx solid #e4d5c2;
+  color: #8e6a43;
+  font-size: 23rpx;
+  font-weight: 700;
+  line-height: 76rpx;
+}
+
+.ghost-btn::after {
+  border: none;
+}

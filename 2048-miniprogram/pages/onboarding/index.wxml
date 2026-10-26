@@ -1,0 +1,99 @@
+<view class="page">
+  <view class="glow glow--one"></view>
+  <view class="glow glow--two"></view>
+
+  <view class="brand">
+    <view class="brand__mark">G</view>
+    <view class="brand__text">
+      <text class="brand__name">小游戏合集</text>
+      <text class="brand__sub">2048 · 数字华容道</text>
+    </view>
+    <text class="brand__tag">新玩家</text>
+  </view>
+
+  <view wx:if="{{loading}}" class="loading">
+    <text class="loading__title">正在准备你的档案…</text>
+  </view>
+
+  <view wx:elif="{{error}}" class="loading">
+    <text class="loading__title">{{error}}</text>
+    <view class="loading__actions">
+      <button class="ghost-btn" bindtap="onRetry">重试</button>
+      <button class="ghost-btn" bindtap="onSkip">先单机进入</button>
+    </view>
+  </view>
+
+  <block wx:else>
+    <view class="hero">
+      <text class="hero__eyebrow">WELCOME</text>
+      <text class="hero__title">先给自己建个档案</text>
+      <text class="hero__desc">排行榜、成就、每日挑战都会记住你。</text>
+    </view>
+
+    <view class="form-card">
+      <view class="step-head">
+        <text class="step-head__index">01</text>
+        <text class="step-head__title">选个头像</text>
+        <text class="step-head__selected">{{avatarEmoji}}</text>
+      </view>
+      <view class="avatar-grid">
+        <view
+          wx:for="{{avatars}}"
+          wx:key="id"
+          class="avatar-item {{avatar === item.id && !avatarUrl ? 'avatar-item--on' : ''}}"
+          data-avatar="{{item.id}}"
+          bindtap="onAvatarTap"
+        >
+          <text class="avatar-item__emoji">{{item.emoji}}</text>
+          <text class="avatar-item__label">{{item.label}}</text>
+        </view>
+      </view>
+
+      <button class="wechat-avatar-btn {{avatarUrl ? 'wechat-avatar-btn--on' : ''}}" open-type="chooseAvatar" bindchooseavatar="onChooseAvatar">
+        <image wx:if="{{avatarPreview}}" class="wechat-avatar-preview" src="{{avatarPreview}}" mode="aspectFill"></image>
+        <text class="wechat-avatar-text">{{uploadingAvatar ? '正在上传…' : (avatarUrl ? '已使用微信头像' : '使用微信头像')}}</text>
+      </button>
+
+      <view class="step-head step-head--gap">
+        <text class="step-head__index">02</text>
+        <text class="step-head__title">你的昵称</text>
+        <text class="step-head__selected">2–12 字</text>
+      </view>
+      <view class="nickname-box">
+        <text class="nickname-box__prefix">{{avatarEmoji}}</text>
+        <input
+          class="nickname-box__input"
+          value="{{nickname}}"
+          maxlength="12"
+          placeholder="输入一个响亮的昵称"
+          bindinput="onNicknameInput"
+        />
+      </view>
+
+      <view class="step-head step-head--gap">
+        <text class="step-head__index">03</text>
+        <text class="step-head__title">性别</text>
+        <text class="step-head__selected">{{genderLabel}}</text>
+      </view>
+      <view class="gender-grid">
+        <view
+          wx:for="{{genders}}"
+          wx:key="id"
+          class="gender-item {{gender === item.id ? 'gender-item--on' : ''}}"
+          data-gender="{{item.id}}"
+          bindtap="onGenderTap"
+        >
+          <text class="gender-item__symbol">{{item.symbol}}</text>
+          <text class="gender-item__label">{{item.label}}</text>
+        </view>
+      </view>
+
+      <button class="submit-btn" loading="{{saving}}" disabled="{{saving}}" bindtap="onSubmit">
+        保存并开始 →
+      </button>
+      <view class="skip-row" bindtap="onSkip">先随便逛逛，稍后再设置</view>
+    </view>
+
+    <text class="privacy">昵称、头像和性别只用于排行榜展示，不采集其他个人信息。</text>
+  </block>
+</view>

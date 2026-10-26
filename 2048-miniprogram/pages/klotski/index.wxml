@@ -1,0 +1,41 @@
+<view class="page theme-{{theme}}">
+  <view class="page-home-link" bindtap="onBackHome">‹ 游戏合集</view>
+  <view class="header">
+    <text class="header__eyebrow">SLIDING PUZZLE</text>
+    <text class="header__title">数字华容道</text>
+    <text class="header__subtitle">滑动数字，把它们按顺序排好</text>
+  </view>
+
+  <view class="size-list">
+    <view
+      wx:for="{{sizes}}"
+      wx:key="size"
+      class="size-card"
+      hover-class="size-card--hover"
+      data-size="{{item.size}}"
+      bindtap="onSelectSize"
+    >
+      <view class="size-card__preview">
+        <view class="preview-grid preview-grid--{{item.size}}">
+          <view
+            wx:for="{{item.preview}}"
+            wx:for-item="cell"
+            wx:key="key"
+            class="preview-cell {{cell.blank ? 'preview-cell--blank' : ''}}"
+          >{{cell.value || ''}}</view>
+        </view>
+      </view>
+      <view class="size-card__body">
+        <view class="size-card__title-row">
+          <text class="size-card__title">{{item.label}}</text>
+          <text class="size-card__tag">{{item.tag}}</text>
+        </view>
+        <text class="size-card__desc">{{item.desc}}</text>
+        <text class="size-card__best">最佳：{{item.best}}</text>
+        <text class="size-card__cta">开始挑战 →</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="tips">滑动方向 = 数字移动的方向；把 1 到 8 / 15 排好，最后留空即可完成。</view>
+</view>

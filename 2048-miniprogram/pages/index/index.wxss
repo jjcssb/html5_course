@@ -1,0 +1,603 @@
+/* 2048 小程序页面样式：棋盘、方块、弹窗、历史战绩、响应式与安全区 */
+.page {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 24rpx 30rpx 40rpx;
+  padding-bottom: calc(40rpx + constant(safe-area-inset-bottom));
+  padding-bottom: calc(40rpx + env(safe-area-inset-bottom));
+  background: var(--bg);
+  color: var(--text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ---------- 顶部 ---------- */
+.header {
+  width: 690rpx;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.brand__title {
+  display: block;
+  font-size: 88rpx;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -2rpx;
+}
+
+.brand__subtitle {
+  display: block;
+  margin-top: 8rpx;
+  font-size: 22rpx;
+  color: var(--text-muted);
+}
+
+.scoreboard {
+  display: flex;
+}
+
+.score-card {
+  min-width: 132rpx;
+  margin-left: 12rpx;
+  padding: 10rpx 14rpx 12rpx;
+  border-radius: 16rpx;
+  background: var(--panel-bg);
+  border: 1rpx solid var(--panel-border);
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.score-card__label {
+  display: block;
+  font-size: 20rpx;
+  color: var(--text-muted);
+}
+
+.score-card__value {
+  display: block;
+  margin-top: 2rpx;
+  font-size: 36rpx;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+/* ---------- 工具栏 ---------- */
+.toolbar {
+  width: 690rpx;
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+}
+
+.toolbar .btn {
+  width: 168rpx;
+  flex: 0 0 168rpx;
+  height: 72rpx;
+  font-size: 24rpx;
+  padding: 0;
+  margin: 0;
+}
+
+.theme-switch {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  margin: 0 10rpx;
+  padding: 4rpx;
+  border-radius: 16rpx;
+  background: var(--panel-bg);
+  border: 1rpx solid var(--panel-border);
+}
+
+.theme-switch__item {
+  flex: 1 1 0;
+  min-width: 0;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 12rpx;
+  font-size: 22rpx;
+  color: var(--text-muted);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.theme-switch__item.is-active {
+  background: var(--primary);
+  color: var(--primary-fg);
+  font-weight: 600;
+}
+
+/* ---------- 棋盘 ---------- */
+.board {
+  position: relative;
+  width: 690rpx;
+  height: 690rpx;
+  margin-top: 24rpx;
+  border-radius: 28rpx;
+  background: var(--board-bg);
+  overflow: hidden;
+  box-shadow: 0 16rpx 36rpx rgba(0, 0, 0, 0.12);
+}
+
+.board-inner {
+  position: absolute;
+  left: 3.2%;
+  top: 3.2%;
+  right: 3.2%;
+  bottom: 3.2%;
+}
+
+.cell {
+  position: absolute;
+  background: var(--cell-bg);
+  border-radius: 12rpx;
+}
+
+.tile {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14rpx;
+  transition: left 120ms ease, top 120ms ease;
+}
+
+.tile__value {
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+.tile--len1 {
+  font-size: 68rpx;
+}
+
+.tile--len2 {
+  font-size: 64rpx;
+}
+
+.tile--len3 {
+  font-size: 52rpx;
+}
+
+.tile--len4 {
+  font-size: 42rpx;
+}
+
+.tile--len5 {
+  font-size: 34rpx;
+}
+
+.tile--len6 {
+  font-size: 28rpx;
+}
+
+.tile--new {
+  animation: tile-appear 160ms ease-out;
+}
+
+.tile--merged {
+  animation: tile-pop 180ms ease-out;
+}
+
+@keyframes tile-appear {
+  from {
+    transform: scale(0.55);
+    opacity: 0.4;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes tile-pop {
+  0% {
+    transform: scale(0.72);
+  }
+  60% {
+    transform: scale(1.14);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.board--shake {
+  animation: board-shake 240ms ease;
+}
+
+@keyframes board-shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-8rpx);
+  }
+  50% {
+    transform: translateX(8rpx);
+  }
+  75% {
+    transform: translateX(-4rpx);
+  }
+}
+
+/* ---------- 方块配色 ---------- */
+.tile--2 {
+  background: var(--tile-2-bg);
+  color: var(--tile-2-fg);
+}
+
+.tile--4 {
+  background: var(--tile-4-bg);
+  color: var(--tile-4-fg);
+}
+
+.tile--8 {
+  background: var(--tile-8-bg);
+  color: var(--tile-8-fg);
+}
+
+.tile--16 {
+  background: var(--tile-16-bg);
+  color: var(--tile-16-fg);
+}
+
+.tile--32 {
+  background: var(--tile-32-bg);
+  color: var(--tile-32-fg);
+}
+
+.tile--64 {
+  background: var(--tile-64-bg);
+  color: var(--tile-64-fg);
+}
+
+.tile--128 {
+  background: var(--tile-128-bg);
+  color: var(--tile-128-fg);
+}
+
+.tile--256 {
+  background: var(--tile-256-bg);
+  color: var(--tile-256-fg);
+}
+
+.tile--512 {
+  background: var(--tile-512-bg);
+  color: var(--tile-512-fg);
+}
+
+.tile--1024 {
+  background: var(--tile-1024-bg);
+  color: var(--tile-1024-fg);
+}
+
+.tile--2048 {
+  background: var(--tile-2048-bg);
+  color: var(--tile-2048-fg);
+  box-shadow: 0 0 18rpx rgba(237, 194, 46, 0.5);
+}
+
+.tile--super {
+  background: var(--tile-super-bg);
+  color: var(--tile-super-fg);
+}
+
+/* ---------- 提示与历史 ---------- */
+.hint {
+  width: 690rpx;
+  margin-top: 16rpx;
+  font-size: 22rpx;
+  line-height: 1.55;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.hint--muted {
+  font-size: 20rpx;
+  opacity: 0.9;
+}
+
+.history {
+  width: 690rpx;
+  margin-top: 16rpx;
+  padding: 0 20rpx;
+  border-radius: 20rpx;
+  background: var(--panel-bg);
+  border: 1rpx solid var(--panel-border);
+  box-sizing: border-box;
+}
+
+.history__summary {
+  height: 76rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.history__title {
+  font-size: 26rpx;
+  font-weight: 600;
+}
+
+.history__right {
+  display: flex;
+  align-items: center;
+}
+
+.history__count {
+  margin-right: 10rpx;
+  font-size: 20rpx;
+  color: var(--text-muted);
+}
+
+.history__arrow {
+  font-size: 20rpx;
+  color: var(--text-muted);
+}
+
+.history__empty {
+  padding: 4rpx 0 24rpx;
+  font-size: 22rpx;
+  color: var(--text-muted);
+}
+
+.history__list {
+  padding-bottom: 8rpx;
+}
+
+.history__item {
+  padding: 14rpx 0;
+  border-top: 1rpx solid var(--panel-border);
+}
+
+.history__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.history__score {
+  font-size: 24rpx;
+  font-weight: 600;
+}
+
+.history__tag {
+  padding: 3rpx 12rpx;
+  border-radius: 999rpx;
+  background: var(--cell-bg);
+  color: var(--text-muted);
+  font-size: 18rpx;
+}
+
+.history__tag--win {
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-weight: 600;
+}
+
+.history__meta {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 6rpx;
+  font-size: 19rpx;
+  color: var(--text-muted);
+}
+
+.history__meta text {
+  margin-right: 18rpx;
+}
+
+.history__clear {
+  margin: 8rpx 0 20rpx;
+}
+
+/* ---------- 弹窗 ---------- */
+.dialog-mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48rpx;
+  box-sizing: border-box;
+  background: rgba(20, 16, 12, 0.55);
+}
+
+.dialog-card {
+  width: 100%;
+  max-width: 620rpx;
+  padding: 44rpx 32rpx 32rpx;
+  border-radius: 28rpx;
+  background: var(--panel-bg);
+  border: 1rpx solid var(--panel-border);
+  box-sizing: border-box;
+  text-align: center;
+}
+
+.dialog-title {
+  display: block;
+  font-size: 40rpx;
+  font-weight: 800;
+}
+
+.dialog-message {
+  display: block;
+  margin-top: 20rpx;
+  font-size: 24rpx;
+  line-height: 1.65;
+  color: var(--text-muted);
+}
+
+.dialog-cloud {
+  display: block;
+  margin-top: 14rpx;
+  font-size: 21rpx;
+  line-height: 1.5;
+  color: var(--accent-strong);
+}
+
+.dialog-actions {
+  display: flex;
+  margin-top: 36rpx;
+}
+
+.dialog-btn {
+  flex: 1;
+  height: 84rpx;
+  margin: 0 8rpx;
+  font-size: 26rpx;
+}
+
+.daily-strip {
+  width: 690rpx;
+  height: 52rpx;
+  margin: 2rpx 0 8rpx;
+  padding: 0 18rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 999rpx;
+  background: var(--accent-soft);
+  color: var(--accent-strong);
+  font-size: 20rpx;
+  font-weight: 600;
+  box-sizing: border-box;
+}
+
+.daily-strip__link {
+  font-weight: 700;
+}
+
+/* ---------- 2048 视觉升级 ---------- */
+.page {
+  background:
+    radial-gradient(circle at 8% 0%, rgba(255, 224, 178, 0.52), transparent 32%),
+    radial-gradient(circle at 96% 8%, rgba(228, 210, 255, 0.28), transparent 28%),
+    var(--bg);
+}
+
+.header {
+  padding: 10rpx 4rpx 0;
+  box-sizing: border-box;
+}
+
+.brand__eyebrow {
+  display: block;
+  margin-bottom: 8rpx;
+  font-size: 17rpx;
+  font-weight: 800;
+  letter-spacing: 4rpx;
+  color: var(--accent-strong);
+  opacity: 0.72;
+}
+
+.brand__title {
+  font-size: 94rpx;
+  letter-spacing: -3rpx;
+}
+
+.brand__subtitle {
+  margin-top: 4rpx;
+  font-size: 20rpx;
+}
+
+.score-card {
+  border-radius: 20rpx;
+  background: linear-gradient(165deg, var(--panel-bg), var(--cell-bg));
+  box-shadow: 0 8rpx 18rpx rgba(92, 65, 38, 0.06);
+}
+
+.score-card__label {
+  font-size: 17rpx;
+  letter-spacing: 1rpx;
+}
+
+.score-card__value {
+  font-size: 34rpx;
+}
+
+.toolbar {
+  margin-top: 16rpx;
+  padding: 10rpx;
+  border-radius: 20rpx;
+  background: var(--panel-bg);
+  border: 1rpx solid var(--panel-border);
+  box-sizing: border-box;
+}
+
+.toolbar .btn {
+  height: 64rpx;
+  border-radius: 14rpx;
+  font-size: 22rpx;
+}
+
+.theme-switch {
+  flex: 1;
+  min-width: 0;
+  margin: 0 10rpx;
+  padding: 4rpx;
+  background: var(--cell-bg);
+  border-radius: 14rpx;
+}
+
+.theme-switch__item {
+  height: 56rpx;
+  line-height: 56rpx;
+  font-size: 19rpx;
+}
+
+.board {
+  box-shadow:
+    0 0 0 8rpx rgba(255, 255, 255, 0.24),
+    0 20rpx 42rpx rgba(50, 35, 20, 0.16);
+}
+
+.hint {
+  margin-top: 12rpx;
+  padding: 12rpx 18rpx;
+  border-radius: 16rpx;
+  background: var(--panel-bg);
+  border: 1rpx solid var(--panel-border);
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.hint--muted {
+  margin-top: 8rpx;
+  font-size: 19rpx;
+  border-style: dashed;
+  background: transparent;
+}
+
+.history {
+  box-shadow: 0 10rpx 24rpx rgba(92, 65, 38, 0.05);
+}
+
+.dialog-card {
+  border-radius: 28rpx;
+  background: linear-gradient(180deg, var(--panel-bg), var(--bg));
+  box-shadow: 0 26rpx 70rpx rgba(30, 20, 10, 0.28);
+}
+
+.daily-strip {
+  background: linear-gradient(135deg, var(--accent-soft), rgba(255, 255, 255, 0.3));
+}
+
+.daily-strip__tag {
+  padding: 4rpx 14rpx;
+  border-radius: 999rpx;
+  background: rgba(255, 255, 255, 0.42);
+  font-size: 17rpx;
+  font-weight: 700;
+}
